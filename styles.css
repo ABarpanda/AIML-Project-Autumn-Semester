@@ -61,15 +61,15 @@ button:hover {
   margin-top: 20px;
   padding: 10px;
   border-radius: 10px;
+  font-size: 1.8rem;
   color: white;
   background-color: transparent;
 }
 
 h1 {
-  background: linear-gradient(to right, #b9dbff, rgb(255, 90, 117));
+  background: linear-gradient(to right, #b9dbff, rgb(254, 206, 214));
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: gradientText 3s infinite alternate-reverse;
 }
 
 @keyframes gradientText {
