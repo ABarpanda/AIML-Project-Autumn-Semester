@@ -1,90 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CGPA Prediction</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        form {
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        input {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        button {
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        .output {
-            font-size: 1.2em;
-            color: #333;
-        }
-    </style>
-</head>
-<body>
+    <link rel="stylesheet" href="styles.css" />
+    <!-- <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      form {
+        margin-bottom: 20px;
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+      }
+      input {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+      .output {
+        font-size: 1.2em;
+        color: #333;
+      }
+    </style> -->
+  </head>
+  <body>
     <h1>Predict your CGPA</h1>
     <form id="predictForm">
-        <label for="maths">Maths Marks:</label>
-        <input type="number" id="maths" name="maths_marks" placeholder="Enter Maths Marks" required>
+      <label for="maths">Maths Marks:</label>
+      <input
+        type="number"
+        id="maths"
+        name="maths_marks"
+        placeholder="Enter Maths Marks"
+        required
+      />
 
-        <label for="aiml">AI/ML Marks:</label>
-        <input type="number" id="aiml" name="aiml_marks" placeholder="Enter AI/ML Marks" required>
+      <label for="aiml">AI/ML Marks:</label>
+      <input
+        type="number"
+        id="aiml"
+        name="aiml_marks"
+        placeholder="Enter AI/ML Marks"
+        required
+      />
 
-        <label for="hs">HS Marks:</label>
-        <input type="number" id="hs" name="hs_marks" placeholder="Enter HS Marks" required>
+      <label for="hs">HS Marks:</label>
+      <input
+        type="number"
+        id="hs"
+        name="hs_marks"
+        placeholder="Enter HS Marks"
+        required
+      />
 
-        <button type="submit">Predict</button>
+      <button type="submit">Predict</button>
     </form>
     <div class="output" id="output"></div>
 
     <script>
-        document.getElementById("predictForm").addEventListener("submit", async function(event) {
-            event.preventDefault();
+      document
+        .getElementById("predictForm")
+        .addEventListener("submit", async function (event) {
+          event.preventDefault();
 
-            // Get input values
-            const maths_marks = document.getElementById("maths").value;
-            const aiml_marks = document.getElementById("aiml").value;
-            const hs_marks = document.getElementById("hs").value;
+          // Get input values
+          const maths_marks = document.getElementById("maths").value;
+          const aiml_marks = document.getElementById("aiml").value;
+          const hs_marks = document.getElementById("hs").value;
 
-            // Build the API URL with query parameters
-            const apiUrl = `https://aiml-project.vercel.app/predict/?maths_marks=${maths_marks}&aiml_marks=${aiml_marks}&hs_marks=${hs_marks}`;
+          // Build the API URL with query parameters
+          const apiUrl = `https://aiml-project.vercel.app/predict/?maths_marks=${maths_marks}&aiml_marks=${aiml_marks}&hs_marks=${hs_marks}`;
 
-            try {
-                // Fetch the API
-                const response = await fetch(apiUrl);
-                if (!response.ok) {
-                    throw new Error("Error: " + response.statusText);
-                }
-
-                // Parse the JSON response
-                const data = await response.json();
-
-                // Extract "Predicted CGPA" from the response and display
-                document.getElementById("output").textContent = 
-                    `Your predicted CGPA is : ${data["Predicted CGPA"]}`;
-            } catch (error) {
-                document.getElementById("output").textContent = "An error occurred: " + error.message;
+          try {
+            // Fetch the API
+            const response = await fetch(apiUrl);
+            if (!response.ok) {
+              throw new Error("Error: " + response.statusText);
             }
+
+            // Parse the JSON response
+            const data = await response.json();
+
+            // Extract "Predicted CGPA" from the response and display
+            document.getElementById(
+              "output"
+            ).textContent = `Your predicted CGPA is : ${data["Predicted CGPA"]}`;
+          } catch (error) {
+            document.getElementById("output").textContent =
+              "An error occurred: " + error.message;
+          }
         });
     </script>
-</body>
+  </body>
 </html>
